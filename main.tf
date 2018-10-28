@@ -41,4 +41,9 @@ resource "aws_iam_account_password_policy" "default" {
   # You can require that IAM user passwords contain at least one uppercase character
   # from the ISO basic Latin alphabet (A to Z).
   require_uppercase_characters = "${var.require_uppercase_characters}"
+
+  # You can set IAM user passwords to be valid for only the specified number of days.
+  # You can choose a password expiration period between 1 and 1095 days, inclusive.
+  # If specify 0, then passwords never expire.
+  max_password_age = "${var.max_password_age}"
 }
