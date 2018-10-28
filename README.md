@@ -4,15 +4,47 @@
 [![GitHub tag](https://img.shields.io/github/tag/tmknom/terraform-aws-iam-account.svg)](https://registry.terraform.io/modules/tmknom/iam-account/aws)
 [![License](https://img.shields.io/github/license/tmknom/terraform-aws-iam-account.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Terraform module template following [Standard Module Structure](https://www.terraform.io/docs/modules/create.html#standard-module-structure).
+Terraform module which creates Account Alias and Account Password Policy resources on AWS.
+
+## Description
+
+Provision [Account Alias](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html)
+and [Account Password Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html).
+This module provides recommended settings.
+
+- Define a minimum password length of at least 16 characters
+- Require lowercase characters, uppercase characters, numbers, symbols in the password
+- Avoid periodic policy of password changes
+- Prevent password reuse
 
 ## Usage
 
-Named `terraform-<PROVIDER>-<NAME>`. Module repositories must use this three-part name format.
+### Minimal
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/tmknom/terraform-aws-iam-account/master/install | sh -s terraform-aws-sample
-cd terraform-aws-sample && make install
+```hcl
+module "iam_account" {
+  source        = "git::https://github.com/tmknom/terraform-aws-iam-account.git?ref=tags/1.0.0"
+  account_alias = "minimal"
+}
+```
+
+### Complete
+
+```hcl
+module "iam_account" {
+  source        = "git::https://github.com/tmknom/terraform-aws-iam-account.git?ref=tags/1.0.0"
+  account_alias = "complete"
+
+  allow_users_to_change_password = true
+  minimum_password_length        = 32
+  require_lowercase_characters   = true
+  require_numbers                = true
+  require_symbols                = true
+  require_uppercase_characters   = true
+  max_password_age               = 0
+  hard_expiry                    = false
+  password_reuse_prevention      = 0
+}
 ```
 
 ## Examples
@@ -22,11 +54,24 @@ cd terraform-aws-sample && make install
 
 ## Inputs
 
-Write your Terraform module inputs.
+| Name                           | Description                                                                                                                         |  Type  | Default | Required |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | :----: | :-----: | :------: |
+| account_alias                  | The account alias.                                                                                                                  | string |    -    |   yes    |
+| allow_users_to_change_password | Whether to allow users to change their own password.                                                                                | string | `true`  |    no    |
+| hard_expiry                    | Whether users are prevented from setting a new password after their password has expired.                                           | string | `false` |    no    |
+| max_password_age               | The number of days that an user password is valid. If specify 0, then passwords never expire.                                       | string |   `0`   |    no    |
+| minimum_password_length        | Minimum length to require for user passwords.                                                                                       | string |  `16`   |    no    |
+| password_reuse_prevention      | The number of previous passwords that users are prevented from reusing. If specify 0, then allowed from reusing previous passwords. | string |  `24`   |    no    |
+| require_lowercase_characters   | Whether to require lowercase characters for user passwords.                                                                         | string | `true`  |    no    |
+| require_numbers                | Whether to require numbers for user passwords.                                                                                      | string | `true`  |    no    |
+| require_symbols                | Whether to require symbols for user passwords.                                                                                      | string | `true`  |    no    |
+| require_uppercase_characters   | Whether to require uppercase characters for user passwords.                                                                         | string | `true`  |    no    |
 
 ## Outputs
 
-Write your Terraform module outputs.
+| Name                                         | Description                                        |
+| -------------------------------------------- | -------------------------------------------------- |
+| iam_account_password_policy_expire_passwords | Indicates whether passwords in the account expire. |
 
 ## Development
 
