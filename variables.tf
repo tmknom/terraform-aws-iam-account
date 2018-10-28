@@ -42,3 +42,9 @@ variable "require_uppercase_characters" {
   type        = "string"
   description = "Whether to require uppercase characters for user passwords."
 }
+
+variable "max_password_age" {
+  default     = 0
+  type        = "string"
+  description = "The number of days that an user password is valid. If specify 0, then passwords never expire."
+}
