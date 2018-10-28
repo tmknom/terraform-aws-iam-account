@@ -46,4 +46,8 @@ resource "aws_iam_account_password_policy" "default" {
   # You can choose a password expiration period between 1 and 1095 days, inclusive.
   # If specify 0, then passwords never expire.
   max_password_age = "${var.max_password_age}"
+
+  # You can prevent IAM users from choosing a new password after their current password has expired.
+  # If specify false, then IAM users can change their passwords after they expire and continue to sign in as the user.
+  hard_expiry = "${var.hard_expiry}"
 }

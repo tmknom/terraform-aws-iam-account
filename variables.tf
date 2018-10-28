@@ -48,3 +48,9 @@ variable "max_password_age" {
   type        = "string"
   description = "The number of days that an user password is valid. If specify 0, then passwords never expire."
 }
+
+variable "hard_expiry" {
+  default     = false
+  type        = "string"
+  description = "Whether users are prevented from setting a new password after their password has expired."
+}
