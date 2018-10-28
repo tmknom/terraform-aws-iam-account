@@ -50,4 +50,9 @@ resource "aws_iam_account_password_policy" "default" {
   # You can prevent IAM users from choosing a new password after their current password has expired.
   # If specify false, then IAM users can change their passwords after they expire and continue to sign in as the user.
   hard_expiry = "${var.hard_expiry}"
+
+  # You can prevent IAM users from reusing a specified number of previous passwords.
+  # You can set the number of previous passwords from 1 to 24, inclusive.
+  # If specify 0, then allowed from reusing previous passwords.
+  password_reuse_prevention = "${var.password_reuse_prevention}"
 }
