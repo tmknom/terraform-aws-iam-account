@@ -19,11 +19,32 @@ This module provides recommended settings.
 
 ## Usage
 
-Named `terraform-<PROVIDER>-<NAME>`. Module repositories must use this three-part name format.
+### Minimal
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/tmknom/terraform-aws-iam-account/master/install | sh -s terraform-aws-sample
-cd terraform-aws-sample && make install
+```hcl
+module "iam_account" {
+  source        = "git::https://github.com/tmknom/terraform-aws-iam-account.git?ref=tags/1.0.0"
+  account_alias = "minimal"
+}
+```
+
+### Complete
+
+```hcl
+module "iam_account" {
+  source        = "git::https://github.com/tmknom/terraform-aws-iam-account.git?ref=tags/1.0.0"
+  account_alias = "complete"
+
+  allow_users_to_change_password = true
+  minimum_password_length        = 32
+  require_lowercase_characters   = true
+  require_numbers                = true
+  require_symbols                = true
+  require_uppercase_characters   = true
+  max_password_age               = 0
+  hard_expiry                    = false
+  password_reuse_prevention      = 0
+}
 ```
 
 ## Examples
