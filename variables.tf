@@ -54,3 +54,9 @@ variable "hard_expiry" {
   type        = "string"
   description = "Whether users are prevented from setting a new password after their password has expired."
 }
+
+variable "password_reuse_prevention" {
+  default     = 24
+  type        = "string"
+  description = "The number of previous passwords that users are prevented from reusing. If specify 0, then allowed from reusing previous passwords."
+}
