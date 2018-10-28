@@ -14,7 +14,7 @@ variable "allow_users_to_change_password" {
 }
 
 variable "minimum_password_length" {
-  default     = 6
+  default     = 16
   type        = "string"
   description = "Minimum length to require for user passwords."
 }
