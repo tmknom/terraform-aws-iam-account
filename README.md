@@ -6,6 +6,17 @@
 
 Terraform module which creates Account Alias and Account Password Policy resources on AWS.
 
+## Description
+
+Provision [Account Alias](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html)
+and [Account Password Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html).
+This module provides recommended settings.
+
+- Define a minimum password length of at least 16 characters
+- Require lowercase characters, uppercase characters, numbers, symbols in the password
+- Avoid periodic policy of password changes
+- Prevent password reuse
+
 ## Usage
 
 Named `terraform-<PROVIDER>-<NAME>`. Module repositories must use this three-part name format.
