@@ -1,6 +1,7 @@
-# Resource Configuration
+# Terraform module which creates Account Alias and Account Password Policy resources on AWS.
 #
-# https://www.terraform.io/docs/configuration/resources.html
+# https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html
+# https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html
 
 # There is only a single account alias per AWS account.
 #
